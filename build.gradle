@@ -1,0 +1,61 @@
+/**
+ * Plugins definitions
+ */
+buildscript {
+    repositories {
+        mavenLocal()
+        jcenter()
+    }
+    dependencies {
+        classpath("net.serenity-bdd:serenity-gradle-plugin:$serenityGradlePlugin")
+    }
+}
+plugins {
+    id 'idea'
+    id 'groovy'
+}
+apply plugin: 'net.serenity-bdd.aggregator'
+
+/**
+ * Dependencies
+ */
+repositories {
+    mavenLocal()
+    jcenter()
+}
+
+dependencies {
+    // Logger
+    compile group: 'ch.qos.logback', name: 'logback-core', version: logbackVersion
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: logbackVersion
+
+    compile group: 'org.jsoup', name: 'jsoup', version: jsoupVersion
+
+    // BDD: Cucumber - Serenity
+    compile("net.serenity-bdd:serenity-core:${serenityVersion}")
+    testCompile("net.serenity-bdd:serenity-rest-assured:${serenityVersion}")
+    testCompile("net.serenity-bdd:serenity-cucumber:${serenityCucumberVersion}")
+
+    testCompile("io.github.bonigarcia:webdrivermanager:${webdrivermanagerVersion}")
+    
+    // Assertions
+    testCompile group: 'junit', name: 'junit', version: junitVersion
+    testCompile group: 'org.assertj', name: 'assertj-core', version: assertjVersion
+}
+
+/**
+ * Compilation and testing properties
+ */
+tasks.withType(GroovyCompile) {
+    options.encoding = "UTF-8" // for Java compilation
+    groovyOptions.encoding = "UTF-8" // for Groovy compilation
+}
+tasks.withType(JavaCompile) {
+    options.compilerArgs << "-Xlint:-options"
+    options.encoding = 'UTF-8'
+}
+test {
+    testLogging.showStandardStreams = true
+    ignoreFailures = true
+}
+compileJava.dependsOn clean
