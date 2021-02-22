@@ -1,6 +1,7 @@
 package es.s2o.selenium.domain;
 
-import cucumber.deps.com.thoughtworks.xstream.annotations.XStreamConverter;
+
+import com.thoughtworks.xstream.annotations.XStreamConverter;
 
 /**
  * Created by sacrists on 26.02.17.
@@ -75,5 +76,18 @@ public class ReservationDto {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    @Override
+    public String toString() {
+        return "ReservationDto{" +
+                "name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", date='" + date + '\'' +
+                ", number='" + number + '\'' +
+                ", time='" + time + '\'' +
+                ", color='" + color + '\'' +
+                '}';
     }
 }

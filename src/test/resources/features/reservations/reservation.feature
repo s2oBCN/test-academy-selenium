@@ -10,5 +10,4 @@ Feature: Registry of the users
     When I register the following reservations:
       | name   | phone | email            | date       | number | time  | color   |
       | Aslak  | 11    | e@aslakhelle.oy  | 2017-02-17 | 1      | 12:00 | #4e2727 |
-      | Aqslak | 111   | 1e@aslakhelle.oy | 2017-02-17 | 9      | 12:30 | RED     |
     Then I get the reservation in the reservations list

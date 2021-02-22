@@ -26,21 +26,25 @@ repositories {
 
 dependencies {
     // Logger
-    compile group: 'ch.qos.logback', name: 'logback-core', version: logbackVersion
-    compile group: 'ch.qos.logback', name: 'logback-classic', version: logbackVersion
+    implementation group: 'ch.qos.logback', name: 'logback-core', version: logbackVersion
+    implementation group: 'ch.qos.logback', name: 'logback-classic', version: logbackVersion
 
-    compile group: 'org.jsoup', name: 'jsoup', version: jsoupVersion
+    implementation("net.serenity-bdd:serenity-core:${serenityVersion}")
+    implementation group: 'org.jsoup', name: 'jsoup', version: jsoupVersion
 
     // BDD: Cucumber - Serenity
-    compile("net.serenity-bdd:serenity-core:${serenityVersion}")
-    testCompile("net.serenity-bdd:serenity-rest-assured:${serenityVersion}")
-    testCompile("net.serenity-bdd:serenity-cucumber:${serenityCucumberVersion}")
+    testImplementation("net.serenity-bdd:serenity-cucumber:${serenityCucumberVersion}")
+    testImplementation("net.serenity-bdd:serenity-rest-assured:${serenityVersion}"){
+        exclude  (group: 'net.serenity-bdd',  module: "serenity-core")
+        exclude  (group: 'io.cucumber')
+    }
+    implementation group: 'com.thoughtworks.xstream', name: 'xstream', version: '1.4.15'
 
-    testCompile("io.github.bonigarcia:webdrivermanager:${webdrivermanagerVersion}")
+    testImplementation("io.github.bonigarcia:webdrivermanager:${webdrivermanagerVersion}")
     
     // Assertions
-    testCompile group: 'junit', name: 'junit', version: junitVersion
-    testCompile group: 'org.assertj', name: 'assertj-core', version: assertjVersion
+    testImplementation group: 'junit', name: 'junit', version: junitVersion
+    testImplementation group: 'org.assertj', name: 'assertj-core', version: assertjVersion
 }
 
 /**
