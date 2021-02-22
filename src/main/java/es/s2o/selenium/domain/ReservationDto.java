@@ -15,7 +15,6 @@ public class ReservationDto {
     private String number;
     private String time;
 
-    @XStreamConverter(TableColorConverter.class)
     private String color;
 
     public ReservationDto() {
