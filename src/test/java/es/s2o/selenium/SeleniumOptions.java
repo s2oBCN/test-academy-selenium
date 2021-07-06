@@ -1,12 +1,18 @@
 package es.s2o.selenium;
 
 
-import com.sun.java.swing.plaf.windows.resources.windows;
-import org.assertj.core.api.Assertions;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.junit.After;
+import org.junit.BeforeClass;
 import org.junit.Test;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
@@ -40,21 +46,36 @@ public class SeleniumOptions {
 
     private static WebDriver driver;
 
+    @BeforeClass
+    public static void setupClass() {
+        WebDriverManager.chromedriver().setup();
+    }
+
+    @After
+    public void teardown() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
+
     @Test
     public void testWebDrives() throws InterruptedException
     {
         LOGGER.debug("start testWebDrive");
 
-        System.setProperty ("webdriver.chrome.driver","bin/chromedriver.exe" );
+        //System.setProperty ("webdriver.chrome.driver","bin/chromedriver.exe" );
         driver = new ChromeDriver();
+
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS) ;
         driver.manage().window().maximize() ;
         LOGGER.debug("driver started");
 
         driver.get("https://the-internet.herokuapp.com" );
-        driver.getTitle();
-        driver.getCurrentUrl();
-        driver.getPageSource();
+        String title = driver.getTitle();
+
+        String currentUrl = driver.getCurrentUrl();
+        String pageSource = driver.getPageSource();
+        Document doc = Jsoup.parseBodyFragment(pageSource);
 
         driver.navigate().to("https://the-internet.herokuapp.com/abtest");
         driver.navigate().back();
@@ -106,7 +127,6 @@ public class SeleniumOptions {
             LOGGER.debug("TakesScreenshot error", e);
         }
 
-        driver.close();
         LOGGER.debug("driver closed");
     }
 
