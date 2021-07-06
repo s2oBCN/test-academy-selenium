@@ -1,9 +1,0 @@
-version: '3.7'
-services:
-  zalenium:
-    image: dosel/zalenium:latest
-    ports:
-        - 4444:4444
-    volumes:
-        - /var/run/docker.sock:/var/run/docker.sock
-    command: start
