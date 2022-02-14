@@ -4,7 +4,7 @@
 buildscript {
     repositories {
         mavenLocal()
-        jcenter()
+        mavenCentral()
     }
     dependencies {
         classpath("net.serenity-bdd:serenity-gradle-plugin:$serenityGradlePlugin")
@@ -12,7 +12,7 @@ buildscript {
 }
 plugins {
     id 'idea'
-    id 'groovy'
+    id 'java'
 }
 apply plugin: 'net.serenity-bdd.aggregator'
 
@@ -21,7 +21,7 @@ apply plugin: 'net.serenity-bdd.aggregator'
  */
 repositories {
     mavenLocal()
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
@@ -33,17 +33,18 @@ dependencies {
     implementation group: 'org.jsoup', name: 'jsoup', version: jsoupVersion
 
     // BDD: Cucumber - Serenity
+    testImplementation("io.cucumber:cucumber-core:${cucumberVersion}")
+    testImplementation("io.cucumber:cucumber-java:${cucumberVersion}")
     testImplementation("net.serenity-bdd:serenity-cucumber:${serenityCucumberVersion}")
     testImplementation("net.serenity-bdd:serenity-rest-assured:${serenityVersion}"){
         exclude  (group: 'net.serenity-bdd',  module: "serenity-core")
         exclude  (group: 'io.cucumber')
     }
-    implementation group: 'com.thoughtworks.xstream', name: 'xstream', version: '1.4.15'
+    testImplementation "org.junit.platform:junit-platform-launcher:1.8.2"
+    testImplementation "org.junit.jupiter:junit-jupiter-engine:5.8.2"
+    testImplementation "org.junit.vintage:junit-vintage-engine:5.8.2"
 
-    testImplementation("io.github.bonigarcia:webdrivermanager:${webdrivermanagerVersion}")
-    
     // Assertions
-    testImplementation group: 'junit', name: 'junit', version: junitVersion
     testImplementation group: 'org.assertj', name: 'assertj-core', version: assertjVersion
 }
 

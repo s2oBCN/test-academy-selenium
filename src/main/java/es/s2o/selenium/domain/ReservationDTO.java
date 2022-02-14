@@ -1,12 +1,10 @@
 package es.s2o.selenium.domain;
 
 
-import com.thoughtworks.xstream.annotations.XStreamConverter;
-
 /**
  * Created by sacrists on 26.02.17.
  */
-public class ReservationDto {
+public class ReservationDTO {
 
     private String name;
     private String phone;
@@ -14,10 +12,9 @@ public class ReservationDto {
     private String date;
     private String number;
     private String time;
-
     private String color;
 
-    public ReservationDto() {
+    public ReservationDTO() {
 
     }
 
@@ -79,7 +76,7 @@ public class ReservationDto {
 
     @Override
     public String toString() {
-        return "ReservationDto{" +
+        return "ReservationDTO{" +
                 "name='" + name + '\'' +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +

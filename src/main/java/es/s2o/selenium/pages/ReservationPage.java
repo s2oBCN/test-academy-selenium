@@ -1,7 +1,6 @@
 package es.s2o.selenium.pages;
 
-import es.s2o.selenium.domain.ReservationDto;
-import net.serenitybdd.core.pages.PageObject;
+import es.s2o.selenium.domain.ReservationDTO;
 import net.serenitybdd.core.pages.WebElementFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +27,7 @@ public class ReservationPage extends PageObjectBase {
     private WebElementFacade display;
     private WebElementFacade display_txtName;
 
-    public void registerReservation(ReservationDto reservation) {
+    public void registerReservation(ReservationDTO reservation) {
         LOGGER.debug("registerReservation starts, reservation: [{}]", reservation);
 
         typeInto(txtName, reservation.getName());

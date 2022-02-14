@@ -1,7 +1,6 @@
 package es.s2o.selenium.pages;
 
-import es.s2o.selenium.domain.ReservationDto;
-import net.serenitybdd.core.pages.PageObject;
+import es.s2o.selenium.domain.ReservationDTO;
 import net.serenitybdd.core.pages.WebElementFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,21 +24,21 @@ public class ReservationListPage extends PageObjectBase {
     private WebElementFacade tblList;
     private WebElementFacade btnAdd;
 
-    public void addReservations(ReservationDto reservation) {
+    public void addReservations(ReservationDTO reservation) {
         btnAdd.click();
         reservationPage.registerReservation(reservation);
     }
 
-    public List<ReservationDto> getReservationList() {
+    public List<ReservationDTO> getReservationList() {
         LOGGER.debug("getReservationList starts");
 
         List<Map<Object, String>> rows = inTable(tblList).getRows();
-        List<ReservationDto> reservations = rows.stream().map(this::mapReservation).collect(Collectors.toList());
+        List<ReservationDTO> reservations = rows.stream().map(this::mapReservation).collect(Collectors.toList());
         return reservations;
     }
 
-    private ReservationDto mapReservation(Map<Object, String> rowMap) {
-        ReservationDto reservation = new ReservationDto();
+    private ReservationDTO mapReservation(Map<Object, String> rowMap) {
+        ReservationDTO reservation = new ReservationDTO();
         reservation.setName(rowMap.get("Name"));
         reservation.setPhone(rowMap.get("Phone"));
         reservation.setEmail(rowMap.get("Email"));

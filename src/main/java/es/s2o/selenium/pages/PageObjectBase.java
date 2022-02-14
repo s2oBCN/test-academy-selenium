@@ -4,7 +4,6 @@ import net.serenitybdd.core.pages.PageObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-
 public class PageObjectBase extends PageObject {
     private Document document;
 

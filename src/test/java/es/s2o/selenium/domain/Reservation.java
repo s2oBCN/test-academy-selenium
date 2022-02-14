@@ -62,7 +62,7 @@ public class Reservation {
 
     @Override
     public String toString() {
-        return "ReservationDto{" +
+        return "ReservationDTO{" +
                 "id=" + id +
                 ", client=" + client +
                 ", date=" + date +
