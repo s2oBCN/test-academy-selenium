@@ -49,15 +49,18 @@ You can improve __everything__ in the project with a PR:
 ```cmd
     gradlew.bat testClasses
 ```
-* Before execute the tests, execute the gradle task: **_downloadChromeDriverServer_**
 
 ### Compilation
 * From IntelliJ: [See intelliJ config](docs/intelliJ.md).
 * From Eclipse: [See eclipse config](docs/eclipse.md).
-* From command line: 
 
 ### Execution
+* From gradle:
+```cmd
 gradle test -Dcucumber.options="--tags @something"
+```
+* From junit class: src/test/java/es/s2o/selenium/tests/reservations/ReservationTest.java
+* __See the reports in target/site/serenity/index.html__
 
 ### CI
 
