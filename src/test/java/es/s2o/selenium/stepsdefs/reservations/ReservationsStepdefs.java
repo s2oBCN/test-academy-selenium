@@ -10,6 +10,8 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.util.EnvironmentVariables;
+import net.thucydides.core.util.SystemEnvironmentVariables;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,7 +26,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ReservationsStepdefs {
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-    private static final String WEB_ROOT = "https://s2obcn.github.io/";
+    private static final String WEB_ROOT = "WEB_ROOT";
     private static final String HOME = "reservationList.html";
 
     @Steps
@@ -50,7 +52,9 @@ public class ReservationsStepdefs {
     @Given("^I'm in the reservations page$")
     public void iMInTheReservationsPage() throws Throwable {
         LOGGER.debug("iMInTheReservationsPage starts");
-        reservationPage.openAt(WEB_ROOT + HOME);
+        EnvironmentVariables variables = SystemEnvironmentVariables.createEnvironmentVariables();
+        String baseUrl = variables.getProperty("WEB_ROOT");
+        reservationPage.openAt(baseUrl + HOME);
     }
 
     @When("^I register the following reservations:$")
