@@ -1,4 +1,4 @@
-package es.s2o.selenium.domain;
+package es.s2o.selenium.reservations.domain;
 
 
 /**

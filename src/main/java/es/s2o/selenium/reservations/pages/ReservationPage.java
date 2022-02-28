@@ -1,12 +1,15 @@
-package es.s2o.selenium.pages;
+package es.s2o.selenium.reservations.pages;
 
-import es.s2o.selenium.domain.ReservationDTO;
+import es.s2o.selenium.core.pages.PageObjectBase;
+import es.s2o.selenium.reservations.domain.ReservationDTO;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.WebElementFacade;
+import org.jsoup.nodes.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.invoke.MethodHandles;
+import java.util.Optional;
 
 /**
  * Created by sacrists on 26.02.17.
@@ -47,7 +50,11 @@ public class ReservationPage extends PageObjectBase {
         btnSave.click();
     }
 
-    private String getHiddenValue(){
-        return getDocument().getElementById("hiddenField").attr("value");
+    private Optional<String> getHiddenValue(){
+        Element hiddenField = getDocument().getElementById("hiddenField");
+        if (hiddenField == null)
+            return Optional.empty();
+
+        return Optional.of(hiddenField.attr("value"));
     }
 }

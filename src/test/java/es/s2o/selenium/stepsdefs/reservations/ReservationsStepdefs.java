@@ -1,8 +1,8 @@
 package es.s2o.selenium.stepsdefs.reservations;
 
-import es.s2o.selenium.domain.ReservationDTO;
-import es.s2o.selenium.pages.ReservationListPage;
-import es.s2o.selenium.pages.ReservationPage;
+import es.s2o.selenium.reservations.domain.ReservationDTO;
+import es.s2o.selenium.reservations.pages.ReservationListPage;
+import es.s2o.selenium.reservations.pages.ReservationPage;
 import es.s2o.selenium.services.ReservationService;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -26,7 +26,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ReservationsStepdefs {
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-    private static final String WEB_ROOT = "WEB_ROOT";
+    private static final String WEB_ROOT = "WEB_RESERVATIONS";
     private static final String HOME = "reservationList.html";
 
     @Steps
@@ -50,22 +50,22 @@ public class ReservationsStepdefs {
     }
 
     @Given("^I'm in the reservations page$")
-    public void iMInTheReservationsPage() throws Throwable {
+    public void iMInTheReservationsPage() {
         LOGGER.debug("iMInTheReservationsPage starts");
         EnvironmentVariables variables = SystemEnvironmentVariables.createEnvironmentVariables();
-        String baseUrl = variables.getProperty("WEB_ROOT");
+        String baseUrl = variables.getProperty(WEB_ROOT);
         reservationPage.openAt(baseUrl + HOME);
     }
 
     @When("^I register the following reservations:$")
-    public void iRegisterTheFollowingReservations(List<ReservationDTO> reservationDTOList) throws Throwable {
+    public void iRegisterTheFollowingReservations(List<ReservationDTO> reservationDTOList) {
         LOGGER.debug("iRegisterTheFollowingReservations starts, list size:[{}]", reservationDTOList.size());
         reservations = reservationDTOList;
         reservations.forEach(reservation -> reservationListPage.addReservations(reservation));
     }
 
     @Then("^I get the reservation in the reservations list$")
-    public void iGetTheReservationInTheReservationsList() throws Throwable {
+    public void iGetTheReservationInTheReservationsList() {
         LOGGER.debug("iGetTheReservationInTheReservationsList starts");
         List<ReservationDTO> actualReservations = reservationListPage.getReservationList();
         assertThat(actualReservations).as("Reservation list")

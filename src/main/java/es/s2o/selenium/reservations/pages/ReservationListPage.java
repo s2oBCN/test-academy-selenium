@@ -1,6 +1,7 @@
-package es.s2o.selenium.pages;
+package es.s2o.selenium.reservations.pages;
 
-import es.s2o.selenium.domain.ReservationDTO;
+import es.s2o.selenium.core.pages.PageObjectBase;
+import es.s2o.selenium.reservations.domain.ReservationDTO;
 import net.serenitybdd.core.pages.WebElementFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,8 +34,7 @@ public class ReservationListPage extends PageObjectBase {
         LOGGER.debug("getReservationList starts");
 
         List<Map<Object, String>> rows = inTable(tblList).getRows();
-        List<ReservationDTO> reservations = rows.stream().map(this::mapReservation).collect(Collectors.toList());
-        return reservations;
+        return  rows.stream().map(this::mapReservation).collect(Collectors.toList());
     }
 
     private ReservationDTO mapReservation(Map<Object, String> rowMap) {
