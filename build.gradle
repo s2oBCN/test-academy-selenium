@@ -14,7 +14,13 @@ plugins {
     id 'idea'
     id 'java'
 }
-apply plugin: 'net.serenity-bdd.aggregator'
+apply plugin: 'net.serenity-bdd.serenity-gradle-plugin'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(16)
+    }
+}
 
 /**
  * Dependencies
