@@ -70,3 +70,4 @@ test {
     ignoreFailures = true
 }
 compileJava.dependsOn clean
+test.finalizedBy(aggregate)
