@@ -73,3 +73,14 @@ $ zalenium/docker-compose up -d
 * Selenium Grid Console http://localhost:4444/grid/console
 * Zalenium http://localhost:4444/grid/admin/live
 
+# Práctica
+Utilizando los patrones aprendidos y frameworks Open Source. Implementar el siguiente escenario:
+En la web de Vueling, verificar que existen vuelos para la siguiente búsqueda:
+■ Origen ‘Madrid’
+■ Destino ‘Barcelona’,
+■ Fecha ‘1 Junio’
+■ Solo ida
+■ Un único pasajero-Se puede implementar en cualquier lenguaje.-El entregable debe contener:
+■ Código fuente del proyecto (sin el compilado)
+■ Un README con las instrucciones necesarias para la ejecución del test.
+■ Un report con el resultado de la ejecución
