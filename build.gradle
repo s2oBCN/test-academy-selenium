@@ -35,39 +35,22 @@ dependencies {
     implementation group: 'ch.qos.logback', name: 'logback-core', version: logbackVersion
     implementation group: 'ch.qos.logback', name: 'logback-classic', version: logbackVersion
 
-    implementation("net.serenity-bdd:serenity-core:${serenityVersion}")
     implementation group: 'org.jsoup', name: 'jsoup', version: jsoupVersion
 
     // BDD: Cucumber - Serenity
-    testImplementation("io.cucumber:cucumber-core:${cucumberVersion}")
-    testImplementation("io.cucumber:cucumber-java:${cucumberVersion}")
-    testImplementation("net.serenity-bdd:serenity-cucumber:${serenityCucumberVersion}")
-    testImplementation("net.serenity-bdd:serenity-rest-assured:${serenityVersion}"){
-        exclude  (group: 'net.serenity-bdd',  module: "serenity-core")
-        exclude  (group: 'io.cucumber')
-    }
-    testImplementation "org.junit.platform:junit-platform-launcher:1.8.2"
-    testImplementation "org.junit.jupiter:junit-jupiter-engine:5.8.2"
-    testImplementation "org.junit.vintage:junit-vintage-engine:5.8.2"
+    implementation("net.serenity-bdd:serenity-core:${serenityVersion}")
+    testImplementation("net.serenity-bdd:serenity-cucumber:${serenityVersion}")
+    testImplementation("net.serenity-bdd:serenity-rest-assured:${serenityVersion}")
+    testImplementation "org.junit.vintage:junit-vintage-engine:${junitVersion}"
 
     // Assertions
     testImplementation group: 'org.assertj', name: 'assertj-core', version: assertjVersion
 }
 
-/**
- * Compilation and testing properties
- */
-tasks.withType(GroovyCompile) {
-    options.encoding = "UTF-8" // for Java compilation
-    groovyOptions.encoding = "UTF-8" // for Groovy compilation
-}
-tasks.withType(JavaCompile) {
-    options.compilerArgs << "-Xlint:-options"
-    options.encoding = 'UTF-8'
-}
 test {
     testLogging.showStandardStreams = true
     ignoreFailures = true
+    useJUnitPlatform()
 }
 compileJava.dependsOn clean
 test.finalizedBy(aggregate)
